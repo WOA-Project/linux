@@ -72,4 +72,14 @@
 
 &sdhc2 {
 	status = "okay";
+
+	//cd-gpios = <&pm8994_gpios 8 0x1>;
+
+	/delete-property/ pinctrl-names;
+	/delete-property/ pinctrl-0;
+	/delete-property/ pinctrl-1;
+};
+
+&sdc2_data_on {
+	drive-strength = <8>;
 };
