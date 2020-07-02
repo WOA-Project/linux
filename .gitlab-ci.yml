@@ -1,0 +1,22 @@
+before_script:
+  - apt-get -qq update
+  - apt-get -qq install bc git lsb-release whiptail
+  - apt-get -qq install build-essential flex bison gcc-aarch64-linux-gnu
+  - git clone https://github.com/WOA-Project/linux
+  - cd linux
+
+variables:
+  NAME: "linux-kernel-lumia"
+  DESC: "beep boop please work"
+
+compile:
+  image: ubuntu
+  script:
+    - make ARCH=arm64 CROSS_COMPILE=gcc-aarch64-linux- -j$(nproc) lumia_defconfig
+    - make ARCH=arm64 CROSS_COMPILE=gcc-aarch64-linux- -j$(nproc)
+  artifacts:
+    paths:
+      - arch/arm64/boot/Image.gz
+      - arch/arm64/boot/dts/qcom/msm8994-msft-lumia-cityman.dtb
+      - arch/arm64/boot/dts/qcom/msm8992-msft-lumia-talkman.dtb
+
